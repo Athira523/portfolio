@@ -138,9 +138,8 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
     <?php $conn->close(); ?>
   </div>
 
-  <footer class="mt-12 bg-[#1f3c2f] text-white py-6 text-center">
-    <p>&copy; 2024 <span class="text-yellow-400">Olivia</span>. All rights reserved.</p>
-  </footer>
+  <?php include 'footer.php'; ?>
+
 
   <!-- Prevent back button after logout -->
   <script>
