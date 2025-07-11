@@ -20,7 +20,7 @@
     </nav>
 
     <!-- Contact Button -->
-    <a href="contact.html"
+    <a href="contact.php"
         class="bg-white text-green-900 font-semibold px-4 py-2 rounded-full hover:bg-yellow-400 hover:text-white transition">
         Contact Me
     </a>
