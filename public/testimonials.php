@@ -111,29 +111,7 @@
   </style>
 </head>
 <body>
-  <header
-        class="bg-green-900 text-white px-6 py-4 mx-auto mt-4 max-w-6xl rounded-full flex items-center justify-between shadow-md">
-        <!-- Logo & Brand -->
-        <div class="flex items-center space-x-0">
-            <img src="image/logo.png" alt="Logo" class="h-11 w-11" />
-            <span class="text-xl font-semibold text-white">
-                Olivia<span class="text-yellow-400">.</span>
-            </span>
-        </div>
-    <nav class="flex space-x-6 text-base font-medium text-white ml-8">
-            <a href="index.html" class="nav-link hover:text-yellow-400">Home</a>
-            <a href="services.html" class="nav-link hover:text-yellow-400">Services</a>
-            <a href="about.html" class="nav-link hover:text-yellow-400">About</a>
-            <a href="projects.html" class="nav-link hover:text-yellow-400">Projects</a>
-            <a href="blogs.html" class="nav-link hover:text-yellow-400">Blogs</a>
-            <a href="testimonials.html" class="nav-link hover:text-yellow-400 active">Testimonials</a>
-        </nav>
-    <!-- Contact Button -->
-        <a href="contact.html"
-            class="bg-white text-green-900 font-semibold px-4 py-2 rounded-full hover:bg-yellow-400 hover:text-white transition">
-            Contact Me
-        </a>
-  </header>
+  <?php include 'header.php'; ?>
 
   <section class="hero">
     <p>Home / Testimonials</p>
@@ -212,13 +190,6 @@
     <h2>Still have a <span>question?</span></h2>
     <button>Contact Us</button>
   </div>
-<!-- Bottom Bar -->
-<div class="bg-[#29452C] text-white text-sm px-6 md:px-20 py-4 flex flex-col md:flex-row justify-between items-center">
-  <p>Copyright © 2024 <span class="text-yellow-400">Olivia</span>. All Rights Reserved.</p>
-  <div class="mt-2 md:mt-0 space-x-4">
-    <a href="#" class="underline">User Terms & Conditions</a>
-    <a href="#" class="underline">Privacy Policy</a>
-  </div>
-</div>
+<?php include 'footer.php'; ?>
 </body>
 </html>
