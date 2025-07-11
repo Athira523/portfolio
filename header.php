@@ -12,11 +12,11 @@
     <!-- Navigation Links -->
     <nav class="flex space-x-6 text-base font-medium text-white ml-8">
         <a href="index.php" class="nav-link hover:text-yellow-400">Home</a>
-        <a href="services.php" class="nav-link hover:text-yellow-400">Services</a>
-        <a href="about.php" class="nav-link hover:text-yellow-400">About</a>
-        <a href="projects.php" class="nav-link hover:text-yellow-400">Projects</a>
-        <a href="blogs.php" class="nav-link hover:text-yellow-400">Blogs</a>
-        <a href="testimonials.php" class="nav-link hover:text-yellow-400">Testimonials</a>
+        <a href="public\services.php" class="nav-link hover:text-yellow-400">Services</a>
+        <a href="public\about.php" class="nav-link hover:text-yellow-400">About</a>
+        <a href="public\projects.php" class="nav-link hover:text-yellow-400">Projects</a>
+        <a href="public\blogs.php" class="nav-link hover:text-yellow-400">Blogs</a>
+        <a href="public\testimonials.php" class="nav-link hover:text-yellow-400">Testimonials</a>
     </nav>
 
     <!-- Contact Button -->

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../includes/config.php';
+require_once 'config.php';
 
 // Prevent back button after logout
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
