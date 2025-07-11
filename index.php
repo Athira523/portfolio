@@ -373,6 +373,7 @@
             class="w-9 h-9 bg-gray-900 text-white rounded-full flex items-center justify-center hover:bg-yellow-500 transition">
             →
           </button>
+          
         </div>
       </div>
 
