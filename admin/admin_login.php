@@ -1,5 +1,8 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once __DIR__ . '/../config.php';
 
 $error = '';
@@ -17,7 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['password'])) {
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_username'] = $user['username'];
-            header("Location: admin/showpage.php");
+            // ✅ Redirect correctly (stay inside /admin/)
+            header("Location: showpage.php");
             exit();
         } else {
             $error = "Invalid credentials.";
@@ -29,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
