@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("sssssss", $name, $email, $phone, $service, $budget, $country, $message);
 
     if ($stmt->execute()) {
-        header("Location: services.html?status=success");
+        header("Location: public\services.php?status=success");
         exit();
     } else {
         echo "Error: " . $stmt->error;

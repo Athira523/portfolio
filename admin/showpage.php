@@ -68,18 +68,18 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
       <span class="text-xl font-semibold">Olivia<span class="text-yellow-400">.</span></span>
     </div>
     <nav class="flex items-center space-x-6">
-      <a href="index.html" class="hover:text-yellow-400">Home</a>
-      <a href="services.html" class="hover:text-yellow-400">Services</a>
-      <a href="about.html" class="hover:text-yellow-400">About</a>
-      <a href="projects.html" class="hover:text-yellow-400">Projects</a>
-      <a href="blogs.html" class="hover:text-yellow-400">Blogs</a>
+      <a href="index.php" class="hover:text-yellow-400">Home</a>
+      <a href="public\services.php" class="hover:text-yellow-400">Services</a>
+      <a href="public\about.php" class="hover:text-yellow-400">About</a>
+      <a href="public\projects.php" class="hover:text-yellow-400">Projects</a>
+      <a href="public\blogs.php" class="hover:text-yellow-400">Blogs</a>
 
       <!-- LOGIN or LOGOUT -->
       <?php if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true): ?>
         <span class="text-sm text-yellow-300 ml-2">Welcome, <?= htmlspecialchars($_SESSION['admin_username']) ?></span>
-        <a href="admin_logout.php" class="ml-4 bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded text-sm font-semibold">Logout</a>
+        <a href="admin\admin_logout.php" class="ml-4 bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded text-sm font-semibold">Logout</a>
       <?php else: ?>
-        <a href="admin_login.php" class="ml-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded text-sm font-semibold">Login</a>
+        <a href="admin\admin_login.php" class="ml-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded text-sm font-semibold">Login</a>
       <?php endif; ?>
     </nav>
   </header>
@@ -120,8 +120,8 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
                   <td><?= htmlspecialchars($row['message']) ?></td>
                   <td><?= date("d M Y, h:i A", strtotime($row['created_at'])) ?></td>
                   <td>
-                    <a href="edit_contact.php?id=<?= $row['id'] ?>" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Edit</a>
-                    <a href="delete_contact.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure you want to delete this entry?')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm">Delete</a>
+                    <a href="admin\edit_contact.php?id=<?= $row['id'] ?>" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Edit</a>
+                    <a href="admin\delete_contact.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure you want to delete this entry?')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm">Delete</a>
                   </td>
                 </tr>
               <?php endwhile; ?>
@@ -142,7 +142,7 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
   <script>
     window.addEventListener('pageshow', function (event) {
       if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
-        window.location.href = 'admin_login.php';
+        window.location.href = 'admin\admin_login.php.php';
       }
     });
   </script>

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("sssssssi", $name, $email, $phone, $service, $budget, $country, $message, $id);
 
     if ($stmt->execute()) {
-        header("Location: showpage.php?status=updated");
+        header("Location: admin\showpage.php?status=updated");
         exit();
     } else {
         echo "Update failed: " . $stmt->error;

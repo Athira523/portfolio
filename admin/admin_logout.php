@@ -6,5 +6,5 @@ $_SESSION['logout_message'] = "You are successfully logged out.";
 
 // Now destroy session **after** storing the message
 session_write_close(); // Make sure the session is saved before redirecting
-header("Location: admin_login.php");
+header("Location: admin\admin_login.php");
 exit();
