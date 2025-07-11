@@ -138,9 +138,6 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
     <?php $conn->close(); ?>
   </div>
 
-  <?php include 'footer.php'; ?>
-
-
   <!-- Prevent back button after logout -->
   <script>
     window.addEventListener('pageshow', function (event) {
@@ -149,6 +146,7 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
       }
     });
   </script>
+<?php include 'footer.php'; ?>
 
 </body>
 </html>
