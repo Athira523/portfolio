@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['password'])) {
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_username'] = $user['username'];
-            header("Location: showpage.php");
+            header("Location: admin/showpage.php");
             exit();
         } else {
             $error = "Invalid credentials.";

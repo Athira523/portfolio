@@ -9,7 +9,7 @@ if (isset($_GET['id'])) {
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
-        header("Location: admin\showpage.php?status=deleted");
+        header("Location: admin/showpage.php?status=deleted");
     } else {
         echo "Delete failed: " . $stmt->error;
     }
