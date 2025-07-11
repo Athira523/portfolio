@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once __DIR__ . '/../config.php';
 
 if (!isset($_GET['id'])) {
     die("ID not provided.");
