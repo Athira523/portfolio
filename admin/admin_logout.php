@@ -1,10 +1,23 @@
 <?php
 session_start();
 
-// Store the message in a temporary variable
-$_SESSION['logout_message'] = "You are successfully logged out.";
+// Destroy all session data securely
+$_SESSION = []; // Unset all session variables
 
-// Now destroy session **after** storing the message
-session_write_close(); // Make sure the session is saved before redirecting
-header("Location: admin/admin_login.php");
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000,
+        $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]
+    );
+}
+
+session_destroy(); // Destroy session file
+
+// Set logout message in a new session
+session_start();
+$_SESSION['logout_message'] = "You are successfully logged out.";
+session_write_close();
+
+header("Location: admin_login.php");
 exit();

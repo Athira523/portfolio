@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 error_reporting(E_ALL);
@@ -11,8 +10,9 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-// Only fetch submissions if logged in
-if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
+$logged_in = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
+
+if ($logged_in) {
     $sql = "SELECT id, name, email, phone, service, budget, country, message, created_at FROM contacts ORDER BY id DESC";
     $result = $conn->query($sql);
 }
@@ -66,33 +66,16 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
 <body>
 
   <!-- Header -->
-  <header class="bg-green-900 text-white px-6 py-4 max-w-6xl mx-auto mt-4 rounded-full flex justify-between items-center">
-    <div class="flex items-center space-x-2">
-      <img src="../image/logo.png" alt="Logo" class="h-10 w-10">
-      <span class="text-xl font-semibold">Olivia<span class="text-yellow-400">.</span></span>
-    </div>
-    <nav class="flex items-center space-x-6">
-      <a href="../index.php" class="hover:text-yellow-400">Home</a>
-      <a href="../public/services.php" class="hover:text-yellow-400">Services</a>
-      <a href="../public/about.php" class="hover:text-yellow-400">About</a>
-      <a href="../public/projects.php" class="hover:text-yellow-400">Projects</a>
-      <a href="../public/blogs.php" class="hover:text-yellow-400">Blogs</a>
+  <body class="flex bg-gray-100">
+<?php include('../includes/sidebar.php'); ?>
+<div class="flex-1 p-8">
 
-      <!-- LOGIN or LOGOUT -->
-      <?php if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true): ?>
-        <span class="text-sm text-yellow-300 ml-2">Welcome, <?= htmlspecialchars($_SESSION['admin_username']) ?></span>
-        <a href="../admin/admin_logout.php" class="ml-4 bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded text-sm font-semibold">Logout</a>
-      <?php else: ?>
-        <a href="../admin/admin_login.php" class="ml-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded text-sm font-semibold">Login</a>
-      <?php endif; ?>
-    </nav>
-  </header>
 
   <!-- Table Content -->
   <div class="table-container">
     <h1>Contact Submissions</h1>
 
-    <?php if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true): ?>
+    <?php if ($logged_in): ?>
       <?php if ($result && $result->num_rows > 0): ?>
         <div class="overflow-auto">
           <table>
@@ -136,7 +119,10 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
         <p class="text-center text-gray-600">No contact submissions found.</p>
       <?php endif; ?>
     <?php else: ?>
-      <p class="text-center text-red-600 font-semibold mt-10">You must be logged in to view submissions.</p>
+      <p class="text-center text-red-600 font-semibold mt-10">
+        You must be logged in to view Dashboard. <br>
+        <a href="admin_login.php" class="text-blue-700 underline">Login here</a>
+      </p>
     <?php endif; ?>
 
     <?php $conn->close(); ?>
@@ -150,8 +136,11 @@ if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true
       }
     });
   </script>
-<footer class="mt-12 bg-[#1f3c2f] text-white py-6 text-center">
+
+  <footer class="mt-12 bg-[#1f3c2f] text-white py-6 text-center">
     <p>&copy; 2024 <span class="text-yellow-400">Olivia</span>. All rights reserved.</p>
   </footer>
+  </div> <!-- close flex-1 -->
 </body>
+  </body>
 </html>
