@@ -1,18 +1,10 @@
 <?php
 session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 require_once __DIR__ . '/../config.php';
-
-// Prevent back button after logout
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
 
 $logged_in = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
 
-if ($logged_in) {
+if ($logged_in && isset($_GET['page']) && $_GET['page'] === 'contacts') {
     $sql = "SELECT id, name, email, phone, service, budget, country, message, created_at FROM contacts ORDER BY id DESC";
     $result = $conn->query($sql);
 }
@@ -21,126 +13,72 @@ if ($logged_in) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Contact Submissions - Olivia</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      font-family: 'Outfit', sans-serif;
-      background-color: #f9f9f9;
-    }
-    .table-container {
-      max-width: 1200px;
-      margin: 50px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    thead {
-      background-color: #1f3c2f;
-      color: white;
-    }
-    th, td {
-      padding: 12px 16px;
-      border: 1px solid #ddd;
-      font-size: 14px;
-    }
-    tbody tr:nth-child(even) {
-      background-color: #f4f4f4;
-    }
-    h1 {
-      font-size: 28px;
-      text-align: center;
-      color: #1f3c2f;
-      margin-bottom: 20px;
-      font-weight: bold;
-    }
-  </style>
 </head>
-<body>
-
-  <!-- Header -->
-  <body class="flex bg-gray-100">
-<?php include('../includes/sidebar.php'); ?>
-<div class="flex-1 p-8">
-
-
-  <!-- Table Content -->
-  <div class="table-container">
-    <h1>Contact Submissions</h1>
-
+<body class="flex flex-col min-h-screen bg-gray-100">
+  <div class="flex flex-1">
     <?php if ($logged_in): ?>
-      <?php if ($result && $result->num_rows > 0): ?>
-        <div class="overflow-auto">
-          <table>
-            <thead>
-              <tr>
-                <th>Sl. No.</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Service</th>
-                <th>Budget</th>
-                <th>Country</th>
-                <th>Message</th>
-                <th>Created At</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php $serial = 1; ?>
-              <?php while ($row = $result->fetch_assoc()): ?>
-                <tr>
-                  <td><?= $serial++ ?></td>
-                  <td><?= htmlspecialchars($row['name']) ?></td>
-                  <td><?= htmlspecialchars($row['email']) ?></td>
-                  <td><?= htmlspecialchars($row['phone']) ?></td>
-                  <td><?= htmlspecialchars($row['service']) ?></td>
-                  <td><?= htmlspecialchars($row['budget']) ?></td>
-                  <td><?= htmlspecialchars($row['country']) ?></td>
-                  <td><?= htmlspecialchars($row['message']) ?></td>
-                  <td><?= date("d M Y, h:i A", strtotime($row['created_at'])) ?></td>
-                  <td>
-                    <a href="edit_contact.php?id=<?= $row['id'] ?>" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Edit</a>
-                    <a href="delete_contact.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure you want to delete this entry?')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm">Delete</a>
-                  </td>
-                </tr>
-              <?php endwhile; ?>
-            </tbody>
-          </table>
-        </div>
-      <?php else: ?>
-        <p class="text-center text-gray-600">No contact submissions found.</p>
-      <?php endif; ?>
-    <?php else: ?>
-      <p class="text-center text-red-600 font-semibold mt-10">
-        You must be logged in to view Dashboard. <br>
-        <a href="admin_login.php" class="text-blue-700 underline">Login here</a>
-      </p>
+      <?php include('../includes/sidebar.php'); ?>
     <?php endif; ?>
 
-    <?php $conn->close(); ?>
+    <div class="flex-1 p-8">
+      <?php if (!$logged_in): ?>
+        <p class="text-center text-red-600 font-semibold mt-10">
+          You must be logged in to view Dashboard.<br>
+          <a href="admin_login.php" class="text-blue-700 underline">Login here</a>
+        </p>
+      <?php elseif (isset($_GET['page']) && $_GET['page'] === 'contacts'): ?>
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Contact Submissions</h1>
+        <?php if ($result && $result->num_rows > 0): ?>
+          <div class="overflow-auto bg-white rounded-lg shadow p-4">
+            <table class="w-full border-collapse">
+              <thead class="bg-green-900 text-white">
+                <tr>
+                  <th class="p-3 border">Sl. No.</th>
+                  <th class="p-3 border">Name</th>
+                  <th class="p-3 border">Email</th>
+                  <th class="p-3 border">Phone</th>
+                  <th class="p-3 border">Service</th>
+                  <th class="p-3 border">Budget</th>
+                  <th class="p-3 border">Country</th>
+                  <th class="p-3 border">Message</th>
+                  <th class="p-3 border">Created At</th>
+                  <th class="p-3 border">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php $serial = 1; ?>
+                <?php while ($row = $result->fetch_assoc()): ?>
+                  <tr class="bg-gray-50 border-b">
+                    <td class="p-2"><?= $serial++ ?></td>
+                    <td class="p-2"><?= htmlspecialchars($row['name']) ?></td>
+                    <td class="p-2"><?= htmlspecialchars($row['email']) ?></td>
+                    <td class="p-2"><?= htmlspecialchars($row['phone']) ?></td>
+                    <td class="p-2"><?= htmlspecialchars($row['service']) ?></td>
+                    <td class="p-2"><?= htmlspecialchars($row['budget']) ?></td>
+                    <td class="p-2"><?= htmlspecialchars($row['country']) ?></td>
+                    <td class="p-2"><?= htmlspecialchars($row['message']) ?></td>
+                    <td class="p-2"><?= date("d M Y, h:i A", strtotime($row['created_at'])) ?></td>
+                    <td class="p-2">
+                      <a href="edit_contact.php?id=<?= $row['id'] ?>" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm">Edit</a>
+                      <a href="delete_contact.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure?')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm">Delete</a>
+                    </td>
+                  </tr>
+                <?php endwhile; ?>
+              </tbody>
+            </table>
+          </div>
+        <?php else: ?>
+          <p class="text-gray-600">No contact submissions found.</p>
+        <?php endif; ?>
+      <?php endif; ?>
+    </div>
   </div>
 
-  <!-- Prevent back button after logout -->
-  <script>
-    window.addEventListener('pageshow', function (event) {
-      if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
-        window.location.href = '../admin/admin_login.php';
-      }
-    });
-  </script>
-
-  <footer class="mt-12 bg-[#1f3c2f] text-white py-6 text-center">
+  <footer class="bg-[#1f3c2f] text-white py-6 text-center mt-auto">
     <p>&copy; 2024 <span class="text-yellow-400">Olivia</span>. All rights reserved.</p>
   </footer>
-  </div> <!-- close flex-1 -->
 </body>
-  </body>
 </html>

@@ -202,65 +202,40 @@
     </div>
   </section>
   <!-- Favorite Tools Section -->
-  <section class="bg-white py-20 px-6" id="tools">
-    <div class="max-w-6xl mx-auto text-center">
-      <!-- Subtitle -->
-      <p><span class="font-bold text-yellow-500">-</span><span class="text-sm text-gray-500 mb-1"></span>
-        My Favorite Tools
-      </p>
+<?php
+require_once 'config.php'; // ✅ Already correct
+?>
+<section class="text-center py-20 bg-gray-50">
+  <p class="text-yellow-500 text-xl mb-2">- My Favorite Tools</p>
+  <h2 class="text-4xl font-semibold text-gray-900">
+    <span class="italic text-yellow-500">Exploring the Tools</span><br>
+    <span class="font-bold">Behind My Designs</span>
+  </h2>
 
-      <!-- Title -->
-      <h2 class="text-3xl md:text-4xl font-semibold">
-        <span class="text-yellow-500 font-medium italic">Exploring the Tools</span><br />
-        <span class="text-gray-900 font-bold">Behind My Designs</span>
-      </h2>
+  <div class="mt-12 flex flex-wrap justify-center gap-8 px-4">
+    <?php
+    require_once 'config.php';
+    $sql = "SELECT * FROM tools ORDER BY id ASC";
+    $result = $conn->query($sql);
 
-      <!-- Tools Grid -->
-      <div class="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 md:gap-10">
-        <!-- Tool Card -->
-        <div class="flex flex-col items-center bg-gray-100 p-4 rounded-3xl">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma"
-            class="h-12 mb-2" />
-          <p class="text-lg font-semibold text-gray-800">98%</p>
-          <p class="text-sm text-gray-600 mt-1">Figma</p>
+    if ($result && $result->num_rows > 0):
+        while ($tool = $result->fetch_assoc()):
+    ?>
+        <div class="bg-white rounded-2xl shadow-md p-6 w-40 text-center">
+          <img src="image/tools/<?= htmlspecialchars($tool['logo']) ?>" alt="<?= htmlspecialchars($tool['name']) ?>" class="mx-auto h-14 mb-4">
+          <div class="text-lg font-semibold text-gray-900"><?= htmlspecialchars($tool['percentage']) ?>%</div>
+          <div class="text-gray-600 mt-1"><?= htmlspecialchars($tool['name']) ?></div>
         </div>
+    <?php
+        endwhile;
+    else:
+        echo "<p class='text-gray-500'>No tools found.</p>";
+    endif;
+    ?>
+  </div>
+</section>
 
-        <div class="flex flex-col items-center bg-gray-100 p-4 rounded-3xl">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketch/sketch-original.svg" alt="Sketch"
-            class="h-12 mb-2" />
-          <p class="text-lg font-semibold text-gray-800">92%</p>
-          <p class="text-sm text-gray-600 mt-1">Sketch</p>
-        </div>
 
-        <div class="flex flex-col items-center bg-gray-100 p-4 rounded-3xl">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-line.svg" alt="Photoshop"
-            class="h-12 mb-2" />
-          <p class="text-lg font-semibold text-gray-800">90%</p>
-          <p class="text-sm text-gray-600 mt-1">Photoshop</p>
-        </div>
-
-        <div class="flex flex-col items-center bg-gray-100 p-4 rounded-3xl">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg"
-            alt="After Effects" class="h-12 mb-2" />
-          <p class="text-lg font-semibold text-gray-800">85%</p>
-          <p class="text-sm text-gray-600 mt-1">After Effects</p>
-        </div>
-
-        <div class="flex flex-col items-center bg-gray-100 p-4 rounded-3xl">
-          <img src="https://raw.githubusercontent.com/storybookjs/brand/main/icon/icon-storybook-default.svg"
-            alt="Storybook" class="h-12 mb-2" />
-          <p class="text-lg font-semibold text-gray-800">90%</p>
-          <p class="text-sm text-gray-600 mt-1">Storybook</p>
-        </div>
-
-        <div class="flex flex-col items-center bg-gray-100 p-4 rounded-3xl">
-          <img src="image\image.png" alt="InVision" class="h-12 mb-2" />
-          <p class="text-lg font-semibold text-gray-800">95%</p>
-          <p class="text-sm text-gray-600 mt-1">InVision</p>
-        </div>
-      </div>
-    </div>
-  </section>
   <section class="bg-gray-100 py-20 px-4 md:px-16">
     <!-- Section Header -->
     <div class="flex justify-between items-center mb-12">
