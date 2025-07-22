@@ -9,7 +9,7 @@
     </head>
 <body class="bg-white text-gray-900 scroll-smooth">
     <!-- Navbar -->
-    <?php include 'header.php'; ?>
+    <?php include '../header.php'; ?>
 
 
   <!-- Page Header -->
@@ -521,7 +521,7 @@
   </div>
 </div>
 <!-- Bottom Bar -->
-<?php include 'footer.php'; ?>
+<?php include '../footer.php'; ?>
  
 
 </body>

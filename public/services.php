@@ -161,7 +161,12 @@
 
 <body class="bg-white text-gray-900 scroll-smooth">
     <!-- Navbar -->
-    <?php include 'header.php'; ?>
+    <?php if (isset($_GET['status']) && $_GET['status'] == 'success'): ?>
+  <div class="bg-green-100 text-green-700 font-semibold py-2 px-4 rounded text-center my-4 mx-auto max-w-md">
+    Thank you! Your form was submitted successfully.
+  </div>
+<?php endif; ?>
+    <?php include '../header.php'; ?>
 
     <section class="breadcrumb">
         <h1>Services</h1>
@@ -177,7 +182,7 @@
 
     <section class="video-section">
         <div class="video-container">
-            <img src="image\videothumbnail.png" alt="Service Video" />
+            <img src="../image/videothumbnail.png" alt="Service Video" />
 
         </div>
     </section>
@@ -207,9 +212,9 @@
             <!-- Mockup Panels -->
 
             <div class="flex justify-center items-center gap-10 mb-10">
-                <img src="image\service1.png" alt="Architecture Design"
+                <img src="../image/service1.png" alt="Architecture Design"
                     class="rounded-lg shadow-lg w-[500px] h-[400px] object-cover" />
-                <img src="image\service2.png" alt="Furniture Store"
+                <img src="../image/service2.png" alt="Furniture Store"
                     class="rounded-lg shadow-lg w-[500px] h-[400px] object-cover" />
             </div>
 
@@ -276,15 +281,15 @@
         </p>
         <ul style="margin-top: 20px; list-style: none; padding: 0;">
             <li style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="image\check-yellow.png" alt="✔" width="20" style="margin-right: 10px;">
+                <img src="..\image\check-yellow.png" alt="✔" width="20" style="margin-right: 10px;">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
             </li>
             <li style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="image\check-yellow.png" alt="✔" width="20" style="margin-right: 10px;">
+                <img src="..\image\check-yellow.png" alt="✔" width="20" style="margin-right: 10px;">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
             </li>
             <li style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="image\check-yellow.png" alt="✔" width="20" style="margin-right: 10px;">
+                <img src="..\image\check-yellow.png" alt="✔" width="20" style="margin-right: 10px;">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
             </li>
         </ul>
@@ -354,7 +359,7 @@
       </div>
 
       <!-- Right Column: Contact Form -->
-      <form class="space-y-6" method="POST" action="process_contact.php">
+      <form class="space-y-6" method="POST" action="../admin/process_contact.php">
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
     <input type="text" name="name" placeholder="Ex. John Doe" required
       class="bg-[#2f4b37] p-4 rounded-md w-full text-white placeholder-gray-400 outline-none" />
@@ -470,7 +475,7 @@
     </div>
   </footer>
     <!-- Bottom Bar -->
-    <?php include 'footer.php'; ?>
+    <?php include '../footer.php'; ?>
 </body>
 
 </html>

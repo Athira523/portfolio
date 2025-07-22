@@ -154,7 +154,7 @@
 </head>
 <body class="bg-white text-gray-900 scroll-smooth">
     <!-- Navbar -->
-    <?php include 'header.php'; ?>
+    <?php include '../header.php'; ?>
 
   <section class="hero">
     <p>Home / About</p>
@@ -194,6 +194,6 @@
     </div>
   </section>
 
-<?php include 'footer.php'; ?>
+<?php include '../footer.php'; ?>
 </body>
 </html>

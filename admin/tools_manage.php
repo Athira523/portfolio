@@ -1,5 +1,15 @@
 <?php
 session_start();
+// Prevent unauthorized access
+if (!isset($_SESSION['admin_logged_in'])) {
+    header("Location: admin_login.php");
+    exit();
+}
+
+// Prevent back button access by disabling browser cache
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
+header("Pragma: no-cache"); // HTTP 1.0
+header("Expires: 0"); // Proxies
 require_once __DIR__ . '/../config.php';
 
 $result = $conn->query("SELECT * FROM tools ORDER BY id DESC");

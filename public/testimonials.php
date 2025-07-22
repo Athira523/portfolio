@@ -111,7 +111,7 @@
   </style>
 </head>
 <body>
-  <?php include 'header.php'; ?>
+  <?php include '../header.php'; ?>
 
   <section class="hero">
     <p>Home / Testimonials</p>
@@ -190,6 +190,6 @@
     <h2>Still have a <span>question?</span></h2>
     <button>Contact Us</button>
   </div>
-<?php include 'footer.php'; ?>
+<?php include '../footer.php'; ?>
 </body>
 </html>
